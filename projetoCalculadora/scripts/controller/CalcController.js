@@ -1,31 +1,56 @@
 class CalcController {
   constructor() {
-    this._displayCalc = "0";
+    this._locale = "pr-BR";
+    this._displayCalcEl = document.querySelector("#display");
+    this._dateEl = document.querySelector("#data");
+    this._timeEl = document.querySelector("#hora");
     this._currentDate;
     this.initialize();
   }
 
   //Tudo que eu quiser que aconteça assim que começar minha calculadora, eu devo colocar dentro do initialize
   initialize() {
-    let displayCalcEl = document.querySelector("#display");
-    let dateEl = document.querySelector("#data");
-    let timeEl = document.querySelector("#hora");
+    this.setDisplayDateTime();
 
-    displayCalcEl.innerHTML = "4567"
-    dateEl.innerHTML= "20/12/1994"
-    timeEl.innerHTML = "04:04"
+    setInterval(() => {
+      this.setDisplayDateTime();
+    }, 1000);
   }
 
+  setDisplayDateTime() {
+    this.displayDate = this.currentDate.toLocaleDateString(this._locale, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+    this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+  }
+
+  get displayTime() {
+    return this._timeEl.innerHTML;
+  }
+
+  set displayTime(value) {
+    return (this._timeEl.innerHTML = value);
+  }
+
+  get displayDate() {
+    return this._dateEl.innerHTML;
+  }
+
+  set displayDate(value) {
+    return (this._dateEl.innerHTML = value);
+  }
   get displayCalc() {
-    return this._displayCalc;
+    return this._displayCalcEl.innerHTML;
   }
 
-  set displayCalc(valor) {
-    this._displayCalc = valor;
+  set displayCalc(value) {
+    this._displayCalcEl.innerHTML = value;
   }
 
   get currentDate() {
-    return this._currentDate;
+    return new Date();
   }
 
   set currentDate(novaData) {
