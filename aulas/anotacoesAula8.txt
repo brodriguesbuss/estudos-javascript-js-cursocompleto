@@ -1,0 +1,6 @@
+Em uma aplicação Web, as camadas existentes são
+1) Model: tratar os dados da aplicação 
+2) View: exibir as informações em nosso navegador
+3) Controller: regra de negocio
+
+This: palavra que usamos para fazer referência ao próprio objeto dentro de uma classe
