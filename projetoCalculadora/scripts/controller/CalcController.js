@@ -12,11 +12,11 @@ class CalcController {
     this._displayCalc = valor;
   }
 
-  get currentDate_currentDate() {
+  get currentDate() {
     return this._currentDate;
   }
 
-  set currentDate_currentDate(novaData) {
+  set currentDate(novaData) {
     this._currentDate = novaData;
   }
 }
