@@ -13,3 +13,36 @@ document.getElementById("display")
 
 
 innerHTML: pega o objeto que eu estou trabalhando e coloque uma informação la dentro no formato HTML
+
+variavel.getDate(): traz dia = 14
+variavel.getMonth(): traz mes = 4
+variavel.getFullYear(): traz ano = 2024
+variavel.toLocaleDateString("pt-BR"): traz data padrão Brasil = 14/04/2024
+variavel.toLocaleDateString("pt-BR", {month: "long"}): traz mes por escrito = abril
+variavel.toLocaleDateString("pt-BR", {month: "short"}): traz mes abreviado = abr
+variavel.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+    }): traz = 14 DE ABR. DE 2024
+variavel.toLocaleTimeString("pt-BR"): traz hora = 14:09:06
+
+setInterval(() => { escrever funções aqui }, milisegundos): define uma função pra ser executada em um intervalo de tempo (milisegundos)
+    setInterval(() => {
+      this.displayDate = this.currentDate.toLocaleDateString(this._locale);
+      this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+    }, 1000);
+
+setTimeout (() => { escrever função que faz interval parar e passar o id do interval}, milisegundos): define um tempo pra parar o interval
+
+Para isso, o interval precisa de uma variavel para salvar o id 
+    let interval = setInterval(() => {
+      this.displayDate = this.currentDate.toLocaleDateString(this._locale);
+      this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 10000);
+
+
