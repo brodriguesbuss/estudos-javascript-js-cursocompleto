@@ -34,12 +34,29 @@ class CalcController {
     return this._operation[this._operation.length - 1];
   }
 
-  setLastOperation(value){
+  setLastOperation(value) {
     this._operation[this._operation.length - 1] = value;
   }
 
   isOperator(value) {
     return ["+", "-", "*", "%", "/"].indexOf(value) > -1;
+  }
+
+  pushOperation(value) {
+    this._operation.push(value);
+
+    if (this._operation.length > 3) {
+      this.calc();
+    }
+  }
+
+  calc() {
+    let last = this._operation.pop();
+    let result = eval(this._operation.join(""))
+    this._operation = [result, last];
+  }
+  setLastNumberToDisplay(){
+    
   }
 
   addOperation(value) {
@@ -48,17 +65,22 @@ class CalcController {
       if (this.isOperator(value)) {
         this.setLastOperation(value);
       } else if (isNaN(value)) {
+        console.log("outra coisa");
       } else {
         // é um numero sim
-        this._operation.push(value);
+        this.pushOperation(value);
       }
     } else {
-      //number
-      let newValue = this.getLastOperation().toString() + value.toString();
-      this.setLastOperation(parseInt(newValue));
+      if (this.isOperator(value)) {
+        this.pushOperation(value);
+      } else {
+        //number
+        let newValue = this.getLastOperation().toString() + value.toString();
+        this.setLastOperation(parseInt(newValue));
+        this.setLastNumberToDisplay()
+      }
     }
-    this._operation.push(value);
-    console.log(this._operation);
+    // console.log(this._operation);
   }
   setError() {
     this.displayCalc = "Error";
@@ -81,7 +103,7 @@ class CalcController {
       case "divisao":
         this.addOperation("/");
         break;
-      case "multiplicação":
+      case "multiplicacao":
         this.addOperation("*");
         break;
       case "porcento":
@@ -114,7 +136,7 @@ class CalcController {
     buttons.forEach((btn, index) => {
       this.addEventListenerAll(btn, "click drag", (e) => {
         let textBtn = btn.className.baseVal.replace("btn-", "");
-        this.execBtn();
+        this.execBtn(textBtn);
       });
 
       this.addEventListenerAll(btn, "mouseover mouseup mousedown", (e) => {
